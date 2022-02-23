@@ -1,15 +1,21 @@
-import { Header, Footer } from './components'
+import { BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from '@mui/system'
+import { Header, Footer } from './components'
 import { theme, AppContainer } from './lib'
+import { Router } from './router'
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <Header />
+      <BrowserRouter>
+        <Header />
 
-      <AppContainer maxWidth="lg">dfd</AppContainer>
+        <AppContainer maxWidth="lg">
+          <Router />
+        </AppContainer>
 
-      <Footer />
+        <Footer />
+      </BrowserRouter>
     </ThemeProvider>
   )
 }

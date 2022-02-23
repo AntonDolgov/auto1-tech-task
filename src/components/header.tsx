@@ -46,6 +46,8 @@ const HeaderNavBox = styled(Box)(({ theme }) => ({
 const HeaderButton = styled(Button)(({ theme }) => ({
   color: theme.palette.text.primary,
   textTransform: 'none',
+  fontSize: 16,
+  fontWeight: 'normal',
   minWidth: 0,
   '& + &': {
     marginLeft: theme.spacing(1),
