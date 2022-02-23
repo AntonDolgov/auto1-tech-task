@@ -1,4 +1,4 @@
-import { Header } from './components'
+import { Header, Footer } from './components'
 import { ThemeProvider } from '@mui/system'
 import { theme, AppContainer } from './lib'
 
@@ -8,6 +8,8 @@ function App() {
       <Header />
 
       <AppContainer maxWidth="lg">dfd</AppContainer>
+
+      <Footer />
     </ThemeProvider>
   )
 }
