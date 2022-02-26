@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useState } from 'react'
 import { styled, Button, Typography } from '@mui/material'
-import { Card, CardSkeleton, Select } from '../components'
+import { Card, CardSkeleton, Pagination, Select } from '../components'
 import { Box } from '@mui/system'
 
 const DEFAULT_VALUE = 'all'
@@ -82,6 +82,8 @@ export const HomePage = () => {
           pictureUrl="1"
         />
         {/* <CardSkeleton /> */}
+
+        <Pagination />
       </Main>
     </Box>
   )
@@ -91,8 +93,10 @@ const Aside = styled('aside')(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   flexShring: 0,
+  alignSelf: 'flex-start',
   border: `1px solid ${theme.palette.divider}`,
   padding: theme.spacing(3),
+  marginBottom: theme.spacing(2),
   width: '25%',
 }))
 
@@ -107,7 +111,7 @@ const Main = styled('main')(({ theme }) => ({
 }))
 
 const Title = styled(Typography)(({ theme }) => ({
-  fontSize: theme.typography.pxToRem(18),
+  fontSize: 18,
   marginBottom: theme.spacing(0.5),
 }))
 

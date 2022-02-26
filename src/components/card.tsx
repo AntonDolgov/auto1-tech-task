@@ -1,4 +1,5 @@
 import { styled, Link, Box, Typography } from '@mui/material'
+import { ButtonLink } from './buttons'
 
 interface CardProps {
   stockNumber: number
@@ -38,9 +39,9 @@ export const Card = ({
           <Uppercase>{mileage.unit}</Uppercase> - {fuelType} - {color}
         </Typography>
 
-        <ButtonDetails component="button" title="View Details">
+        <ButtonLink component="button" title="View Details">
           View Details
-        </ButtonDetails>
+        </ButtonLink>
       </CardInfo>
     </CardBox>
   )
@@ -62,6 +63,7 @@ const CardBox = styled(Box)(({ theme }) => ({
   border: `1px solid ${theme.palette.divider}`,
   display: 'flex',
   padding: theme.spacing(1.5),
+  marginTop: theme.spacing(1.5),
 }))
 
 const GrayBox = styled(Box)(({ theme }) => ({
@@ -80,7 +82,7 @@ const CardInfo = styled(Box)(({ theme }) => ({
 }))
 
 const Title = styled(Typography)(({ theme }) => ({
-  fontSize: theme.typography.pxToRem(18),
+  fontSize: 18,
   fontWeight: 'bold',
   marginBottom: theme.spacing(0.5),
 }))
@@ -88,15 +90,6 @@ const Title = styled(Typography)(({ theme }) => ({
 const Uppercase = styled('span')(() => ({
   textTransform: 'uppercase',
 }))
-
-const ButtonDetails = styled(Link)(({ theme }) => ({
-  textDecoration: 'none',
-  borderBottom: '1px solid transparent',
-  transition: 'all 200ms ease',
-  '&:hover': {
-    borderBottomColor: theme.palette.primary.main,
-  },
-})) as typeof Link
 
 const ImgLink = styled(Link)(({ theme }) => ({
   textDecoration: 'none',
