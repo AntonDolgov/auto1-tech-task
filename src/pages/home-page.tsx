@@ -1,7 +1,7 @@
 import { useCallback, useMemo, useState } from 'react'
-import { styled, Button, Typography } from '@mui/material'
+import { styled, Box, Button, Typography } from '@mui/material'
 import { Card, CardSkeleton, Pagination, Select } from '../components'
-import { Box } from '@mui/system'
+import { AppContainer } from '../lib'
 
 const DEFAULT_VALUE = 'all'
 
@@ -38,54 +38,58 @@ export const HomePage = () => {
   )
 
   return (
-    <Box display="flex" paddingTop={3.5}>
-      <Aside>
-        <Select
-          value={color}
-          label="Color"
-          onChange={(event) => setColor(event.target.value)}
-        >
-          {colorsSelectList.map((item) => (
-            <option key={item} value={item}>
-              {getColorLabel(item)}
-            </option>
-          ))}
-        </Select>
+    <AppContainer>
+      <Box display="flex" paddingTop={3.5}>
+        <Aside>
+          <Select
+            value={color}
+            label="Color"
+            onChange={(event) => setColor(event.target.value)}
+          >
+            {colorsSelectList.map((item) => (
+              <option key={item} value={item}>
+                {getColorLabel(item)}
+              </option>
+            ))}
+          </Select>
 
-        <Select
-          value={manufactorer}
-          label="Manufactorer"
-          onChange={(event) => setManufactorer(event.target.value)}
-        >
-          {manufactorersSelectList.map((item) => (
-            <option key={item} value={item}>
-              {getManufacturerLabel(item)}
-            </option>
-          ))}
-        </Select>
+          <Select
+            value={manufactorer}
+            label="Manufactorer"
+            onChange={(event) => setManufactorer(event.target.value)}
+          >
+            {manufactorersSelectList.map((item) => (
+              <option key={item} value={item}>
+                {getManufacturerLabel(item)}
+              </option>
+            ))}
+          </Select>
 
-        <ButtonFilter variant="contained">Filter</ButtonFilter>
-      </Aside>
+          <ButtonFilter variant="contained" title="Filter">
+            Filter
+          </ButtonFilter>
+        </Aside>
 
-      <Main>
-        <Title variant="h1">Available cars</Title>
+        <Main>
+          <Title variant="h1">Available cars</Title>
 
-        <SubTitle variant="subtitle1">Showing 10 of 100 results</SubTitle>
+          <SubTitle variant="subtitle1">Showing 10 of 100 results</SubTitle>
 
-        <Card
-          manufacturerName="Chrysler"
-          modelName="Viper"
-          stockNumber={12345}
-          color="red"
-          mileage={{ number: 1232342, unit: 'km' }}
-          fuelType="diesel"
-          pictureUrl="1"
-        />
-        {/* <CardSkeleton /> */}
+          <Card
+            manufacturerName="Chrysler"
+            modelName="Viper"
+            stockNumber={12345}
+            color="red"
+            mileage={{ number: 1232342, unit: 'km' }}
+            fuelType="diesel"
+            pictureUrl="1"
+          />
+          {/* <CardSkeleton /> */}
 
-        <Pagination />
-      </Main>
-    </Box>
+          <Pagination />
+        </Main>
+      </Box>
+    </AppContainer>
   )
 }
 

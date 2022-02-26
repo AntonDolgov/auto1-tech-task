@@ -5,11 +5,14 @@ export const theme = createTheme({
     common: {
       black: '#4a4a4a',
     },
+    divider: '#ededed',
     primary: {
       main: '#ea7f28',
       contrastText: '#fff',
     },
-    divider: '#ededed',
+    secondary: {
+      main: '#ededed',
+    },
   },
   typography: {
     h1: {
@@ -30,7 +33,13 @@ export const theme = createTheme({
     MuiButton: {
       styleOverrides: {
         contained: {
-          minWidth: 120,
+          boxShadow: 'none',
+          display: 'inline-flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          minWidth: 128,
+          height: 32,
+          padding: 0,
           textTransform: 'none',
         },
       },

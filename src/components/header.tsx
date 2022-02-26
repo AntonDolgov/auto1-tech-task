@@ -1,8 +1,8 @@
 import { useCallback } from 'react'
 import { useMatch, useNavigate } from 'react-router-dom'
-import { AppBar, Box, Button, Link, Toolbar } from '@mui/material'
+import { AppBar, Box, Button, Toolbar } from '@mui/material'
 import { styled } from '@mui/material/styles'
-import { AppContainer } from '../lib'
+import { AppContainer, ImgLink } from '../lib'
 import LogoImg from '../img/logo.png'
 
 export const Header = () => {
@@ -34,11 +34,11 @@ export const Header = () => {
           </Box>
 
           <HeaderNavBox as="nav">
-            <HeaderButton>Purchase</HeaderButton>
+            <HeaderButton title="Purchase">Purchase</HeaderButton>
 
-            <HeaderButton>My order</HeaderButton>
+            <HeaderButton title="My order">My order</HeaderButton>
 
-            <HeaderButton>Sell</HeaderButton>
+            <HeaderButton title="Sell">Sell</HeaderButton>
           </HeaderNavBox>
         </HeaderToolbar>
       </AppContainer>
@@ -81,8 +81,3 @@ const HeaderButton = styled(Button)(({ theme }) => ({
 const Image = styled('img')({
   maxWidth: '100%',
 })
-
-const ImgLink = styled(Link)({
-  display: 'inline-flex',
-  textDecoration: 'none',
-}) as typeof Link

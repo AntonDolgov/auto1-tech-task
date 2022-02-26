@@ -1,5 +1,6 @@
-import { styled, Link, Box, Typography } from '@mui/material'
+import { styled, Box, Typography } from '@mui/material'
 import { ButtonLink } from './buttons'
+import { ImgLink, Uppercase } from '../lib'
 
 interface CardProps {
   stockNumber: number
@@ -67,7 +68,7 @@ const CardBox = styled(Box)(({ theme }) => ({
 }))
 
 const GrayBox = styled(Box)(({ theme }) => ({
-  background: theme.palette.divider,
+  background: theme.palette.secondary.main,
 }))
 
 const CardPic = styled(GrayBox)(({ theme }) => ({
@@ -86,12 +87,3 @@ const Title = styled(Typography)(({ theme }) => ({
   fontWeight: 'bold',
   marginBottom: theme.spacing(0.5),
 }))
-
-const Uppercase = styled('span')(() => ({
-  textTransform: 'uppercase',
-}))
-
-const ImgLink = styled(Link)({
-  display: 'inline-flex',
-  textDecoration: 'none',
-}) as typeof Link

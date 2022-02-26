@@ -1,6 +1,6 @@
 import { BrowserRouter } from 'react-router-dom'
 import { Header, Footer } from './components'
-import { theme, AppContainer } from './lib'
+import { theme, AppContainer, Main } from './lib'
 import { Router } from './router'
 import { CssBaseline, GlobalStyles, ThemeProvider } from '@mui/material'
 
@@ -22,9 +22,9 @@ function App() {
       <BrowserRouter>
         <Header />
 
-        <AppContainer maxWidth="lg">
+        <Main>
           <Router />
-        </AppContainer>
+        </Main>
 
         <Footer />
       </BrowserRouter>
