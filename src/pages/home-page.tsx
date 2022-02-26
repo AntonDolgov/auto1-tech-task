@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useState } from 'react'
 import { styled, Button, Typography } from '@mui/material'
-import { Select } from '../components'
+import { Card, CardSkeleton, Select } from '../components'
 import { Box } from '@mui/system'
 
 const DEFAULT_VALUE = 'all'
@@ -71,6 +71,17 @@ export const HomePage = () => {
         <Title variant="h1">Available cars</Title>
 
         <SubTitle variant="subtitle1">Showing 10 of 100 results</SubTitle>
+
+        <Card
+          manufacturerName="Chrysler"
+          modelName="Viper"
+          stockNumber={12345}
+          color="red"
+          mileage={{ number: 1232342, unit: 'km' }}
+          fuelType="diesel"
+          pictureUrl="1"
+        />
+        {/* <CardSkeleton /> */}
       </Main>
     </Box>
   )
@@ -79,6 +90,7 @@ export const HomePage = () => {
 const Aside = styled('aside')(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
+  flexShring: 0,
   border: `1px solid ${theme.palette.divider}`,
   padding: theme.spacing(3),
   width: '25%',
@@ -90,12 +102,15 @@ const ButtonFilter = styled(Button)(({ theme }) => ({
 }))
 
 const Main = styled('main')(({ theme }) => ({
+  flexGrow: 1,
   padding: theme.spacing(0, 3),
 }))
 
 const Title = styled(Typography)(({ theme }) => ({
   fontSize: theme.typography.pxToRem(18),
-  marginBottom: theme.spacing(1),
+  marginBottom: theme.spacing(0.5),
 }))
 
-const SubTitle = styled(Typography)()
+const SubTitle = styled(Typography)(({ theme }) => ({
+  marginBottom: theme.spacing(2),
+}))

@@ -5,7 +5,10 @@ export const Footer = () => (
 )
 
 const FooterBox = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
   borderTop: `1px solid ${theme.palette.divider}`,
-  padding: theme.spacing(4),
+  minHeight: theme.spacing(10),
   textAlign: 'center',
 }))

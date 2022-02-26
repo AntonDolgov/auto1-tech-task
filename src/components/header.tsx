@@ -26,17 +26,20 @@ export const Header = () => {
 }
 
 const HeaderAppBar = styled(AppBar)(({ theme }) => ({
+  alignItems: 'center',
+  flexDirection: 'row',
   background: theme.palette.background.default,
-  border: `1px solid ${theme.palette.divider}`,
+  borderBottom: `1px solid ${theme.palette.divider}`,
   boxShadow: 'none',
-  padding: `${theme.spacing(1.5)} 0`,
+  minHeight: theme.spacing(10),
 }))
 
-const HeaderToolbar = styled(Toolbar)`
-  @media all {
-    padding: 0;
-  }
-`
+const HeaderToolbar = styled(Toolbar)(({ theme }) => ({
+  '@media all': {
+    padding: 0,
+    minHeight: 0,
+  },
+}))
 
 const HeaderNavBox = styled(Box)(({ theme }) => ({
   marginLeft: 'auto',
