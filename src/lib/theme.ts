@@ -8,6 +8,12 @@ export const theme = createTheme({
     },
   },
   typography: {
+    h1: {
+      fontWeight: 'bold',
+    },
+    subtitle1: {
+      fontSize: 18,
+    },
     caption: {
       fontSize: 14,
     },

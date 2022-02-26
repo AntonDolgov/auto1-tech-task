@@ -1,6 +1,7 @@
 import { useCallback, useMemo, useState } from 'react'
-import { styled, Box, Button } from '@mui/material'
+import { styled, Button, Typography } from '@mui/material'
 import { Select } from '../components'
+import { Box } from '@mui/system'
 
 const DEFAULT_VALUE = 'all'
 
@@ -37,8 +38,8 @@ export const HomePage = () => {
   )
 
   return (
-    <>
-      <Aside display="flex" flexDirection="column">
+    <Box display="flex" paddingTop={3.5}>
+      <Aside>
         <Select
           value={color}
           label="Color"
@@ -65,13 +66,20 @@ export const HomePage = () => {
 
         <ButtonFilter variant="contained">Filter</ButtonFilter>
       </Aside>
-    </>
+
+      <Main>
+        <Title variant="h1">Available cars</Title>
+
+        <SubTitle variant="subtitle1">Showing 10 of 100 results</SubTitle>
+      </Main>
+    </Box>
   )
 }
 
-const Aside = styled(Box)(({ theme }) => ({
+const Aside = styled('aside')(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
   border: `1px solid ${theme.palette.divider}`,
-  marginTop: theme.spacing(3.5),
   padding: theme.spacing(3),
   width: '25%',
 }))
@@ -80,3 +88,14 @@ const ButtonFilter = styled(Button)(({ theme }) => ({
   alignSelf: 'flex-end',
   marginTop: theme.spacing(3),
 }))
+
+const Main = styled('main')(({ theme }) => ({
+  padding: theme.spacing(0, 3),
+}))
+
+const Title = styled(Typography)(({ theme }) => ({
+  fontSize: theme.typography.pxToRem(18),
+  marginBottom: theme.spacing(1),
+}))
+
+const SubTitle = styled(Typography)()
