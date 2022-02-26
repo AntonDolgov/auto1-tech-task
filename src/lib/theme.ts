@@ -2,6 +2,9 @@ import { createTheme } from '@mui/material'
 
 export const theme = createTheme({
   palette: {
+    common: {
+      black: '#4a4a4a',
+    },
     primary: {
       main: '#ea7f28',
       contrastText: '#fff',
@@ -10,6 +13,7 @@ export const theme = createTheme({
   },
   typography: {
     h1: {
+      fontSize: 32,
       fontWeight: 'bold',
     },
     subtitle1: {

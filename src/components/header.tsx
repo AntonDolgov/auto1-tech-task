@@ -1,15 +1,36 @@
-import { AppBar, Box, Button, Toolbar } from '@mui/material'
+import { useCallback } from 'react'
+import { useMatch, useNavigate } from 'react-router-dom'
+import { AppBar, Box, Button, Link, Toolbar } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import { AppContainer } from '../lib'
 import LogoImg from '../img/logo.png'
 
 export const Header = () => {
+  const navigate = useNavigate()
+  const match = useMatch('/')
+
+  const handleLogoClick = useCallback(() => {
+    if (!match) {
+      navigate('/')
+    }
+  }, [match, navigate])
+
   return (
     <HeaderAppBar position="sticky">
       <AppContainer>
         <HeaderToolbar>
-          <Box display="flex" width={200}>
-            <Image src={LogoImg} />
+          <Box display="flex" width={188}>
+            {match ? (
+              <Image src={LogoImg} alt="Logo" />
+            ) : (
+              <ImgLink
+                component="button"
+                onClick={handleLogoClick}
+                title="Go to the main page"
+              >
+                <Image src={LogoImg} alt="Logo" />
+              </ImgLink>
+            )}
           </Box>
 
           <HeaderNavBox as="nav">
@@ -34,12 +55,12 @@ const HeaderAppBar = styled(AppBar)(({ theme }) => ({
   minHeight: theme.spacing(10),
 }))
 
-const HeaderToolbar = styled(Toolbar)(({ theme }) => ({
+const HeaderToolbar = styled(Toolbar)({
   '@media all': {
     padding: 0,
     minHeight: 0,
   },
-}))
+})
 
 const HeaderNavBox = styled(Box)(({ theme }) => ({
   marginLeft: 'auto',
@@ -57,6 +78,11 @@ const HeaderButton = styled(Button)(({ theme }) => ({
   },
 }))
 
-const Image = styled('img')`
-  max-width: 100%;
-`
+const Image = styled('img')({
+  maxWidth: '100%',
+})
+
+const ImgLink = styled(Link)({
+  display: 'inline-flex',
+  textDecoration: 'none',
+}) as typeof Link

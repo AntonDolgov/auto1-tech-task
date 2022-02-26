@@ -1,9 +1,8 @@
 import { styled, Link } from '@mui/material'
 
 export const ButtonLink = styled(Link)(({ theme }) => ({
-  textDecoration: 'none',
-  fontSize: 14,
   borderBottom: '1px solid transparent',
+  textDecoration: 'none',
   transition: 'all 200ms ease',
   '&:hover': {
     borderBottomColor: theme.palette.primary.main,

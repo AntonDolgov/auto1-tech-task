@@ -39,7 +39,7 @@ export const Card = ({
           <Uppercase>{mileage.unit}</Uppercase> - {fuelType} - {color}
         </Typography>
 
-        <ButtonLink component="button" title="View Details">
+        <ButtonLink component="button" title="View Details" fontSize={14}>
           View Details
         </ButtonLink>
       </CardInfo>
@@ -91,6 +91,7 @@ const Uppercase = styled('span')(() => ({
   textTransform: 'uppercase',
 }))
 
-const ImgLink = styled(Link)(({ theme }) => ({
+const ImgLink = styled(Link)({
+  display: 'inline-flex',
   textDecoration: 'none',
-})) as typeof Link
+}) as typeof Link

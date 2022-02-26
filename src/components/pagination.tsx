@@ -21,5 +21,6 @@ const Current = styled('span')(({ theme }) => ({
 }))
 
 const PaginationLink = styled(ButtonLink)(({ theme }) => ({
+  fontSize: 14,
   margin: theme.spacing(0, 1.5),
 })) as typeof Link
