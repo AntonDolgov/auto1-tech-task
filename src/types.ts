@@ -12,10 +12,7 @@ export type RequestState<T> =
   | {
       isLoading: false
       data: null
-      error: {
-        statusCode: number
-        message: string
-      }
+      error: Error
     }
 
 export interface CarInfo {
@@ -35,6 +32,10 @@ export interface CarsResponse {
   cars: CarInfo[]
   totalCarsCount: number
   totalPageCount: number
+}
+
+export interface CarInfoResponse {
+  car: CarInfo
 }
 
 export interface ColorsResponse {

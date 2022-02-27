@@ -1,4 +1,5 @@
 import { styled, Box, Typography } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 import { ButtonLink } from './buttons'
 import { ImgLink, Uppercase } from '../lib'
 import type { CarInfo } from '../types'
@@ -13,11 +14,16 @@ export const Card = ({
   pictureUrl,
 }: CarInfo) => {
   const title = `${manufacturerName} ${modelName}`
+  const navigate = useNavigate()
 
   return (
     <CardBox>
-      <ImgLink component="button" title={title}>
-        <CardPic />
+      <ImgLink
+        component="button"
+        title={title}
+        onClick={() => navigate(`/product/${stockNumber}`)}
+      >
+        <CardPic as="img" src={pictureUrl} />
       </ImgLink>
 
       <CardInfo>
@@ -28,7 +34,12 @@ export const Card = ({
           <Uppercase>{mileage.unit}</Uppercase> - {fuelType} - {color}
         </Typography>
 
-        <ButtonLink component="button" title="View Details" fontSize={14}>
+        <ButtonLink
+          component="button"
+          title="View Details"
+          fontSize={14}
+          onClick={() => navigate(`/product/${stockNumber}`)}
+        >
           View Details
         </ButtonLink>
       </CardInfo>
@@ -38,7 +49,7 @@ export const Card = ({
 
 export const CardSkeleton = () => (
   <CardBox>
-    <CardPic />
+    <SkeletonPic />
 
     <CardInfo>
       <GrayBox width={264} height={28} mb={0.5} />
@@ -59,10 +70,18 @@ const GrayBox = styled(Box)(({ theme }) => ({
   background: theme.palette.secondary.main,
 }))
 
-const CardPic = styled(GrayBox)(({ theme }) => ({
+const SkeletonPic = styled(GrayBox)(({ theme }) => ({
   flexShring: 0,
   width: theme.spacing(13),
   height: theme.spacing(10),
+}))
+
+const CardPic = styled('img')(({ theme }) => ({
+  flexShring: 0,
+  width: theme.spacing(13),
+  height: theme.spacing(10),
+  objectFit: 'contain',
+  objectPosition: 'center center',
 }))
 
 const CardInfo = styled(Box)(({ theme }) => ({

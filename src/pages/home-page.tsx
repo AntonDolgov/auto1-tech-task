@@ -175,9 +175,7 @@ export const HomePage = () => {
 
           {cars.isLoading && <CardSkeleton />}
           {cars.error && (
-            <Typography color="error">
-              {cars.error.statusCode}: {cars.error.message}
-            </Typography>
+            <Typography color="error">{cars.error.message}</Typography>
           )}
 
           {cars.data && (
