@@ -7,4 +7,9 @@ export const ButtonLink = styled(Link)(({ theme }) => ({
   '&:hover': {
     borderBottomColor: theme.palette.primary.main,
   },
+  '&[disabled]': {
+    filter: 'grayscale(1)',
+    cursor: 'default',
+    borderColor: 'transparent',
+  },
 })) as typeof Link

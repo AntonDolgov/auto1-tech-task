@@ -1,19 +1,7 @@
 import { styled, Box, Typography } from '@mui/material'
 import { ButtonLink } from './buttons'
 import { ImgLink, Uppercase } from '../lib'
-
-interface CardProps {
-  stockNumber: number
-  manufacturerName: string
-  modelName: string
-  color: string
-  mileage: {
-    number: number
-    unit: string
-  }
-  fuelType: string
-  pictureUrl: string
-}
+import type { CarInfo } from '../types'
 
 export const Card = ({
   stockNumber,
@@ -23,7 +11,7 @@ export const Card = ({
   mileage,
   fuelType,
   pictureUrl,
-}: CardProps) => {
+}: CarInfo) => {
   const title = `${manufacturerName} ${modelName}`
 
   return (

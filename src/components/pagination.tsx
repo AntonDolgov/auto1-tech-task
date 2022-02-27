@@ -1,16 +1,52 @@
 import { styled, Box, Link } from '@mui/material'
 import { ButtonLink } from './buttons'
 
-export const Pagination = () => {
+const MIN_PAGE = 1
+
+interface PaginationProps {
+  onChange: (page: number) => void
+  page: number
+  totalPageCount: number
+}
+
+export const Pagination = (props: PaginationProps) => {
+  const { page, onChange, totalPageCount } = props
+
   return (
     <Box display="flex" justifyContent="center" py={3}>
-      <PaginationLink component="button">First</PaginationLink>
-      <PaginationLink component="button">Previous</PaginationLink>
+      <PaginationLink
+        component="button"
+        disabled={page <= MIN_PAGE}
+        onClick={() => onChange(MIN_PAGE)}
+      >
+        First
+      </PaginationLink>
+      <PaginationLink
+        component="button"
+        disabled={page <= MIN_PAGE}
+        onClick={() => onChange(page - 1)}
+      >
+        Previous
+      </PaginationLink>
 
-      <Current>Page 2 of 10</Current>
+      <Current>
+        Page {page} of {totalPageCount}
+      </Current>
 
-      <PaginationLink component="button">Next</PaginationLink>
-      <PaginationLink component="button">Last</PaginationLink>
+      <PaginationLink
+        component="button"
+        disabled={page >= totalPageCount}
+        onClick={() => onChange(page + 1)}
+      >
+        Next
+      </PaginationLink>
+      <PaginationLink
+        component="button"
+        disabled={page >= totalPageCount}
+        onClick={() => onChange(totalPageCount)}
+      >
+        Last
+      </PaginationLink>
     </Box>
   )
 }
