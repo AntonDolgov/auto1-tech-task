@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Box, Button, Typography, styled } from '@mui/material'
 import { AppContainer, Uppercase } from '../lib'
@@ -12,6 +12,7 @@ const DEFAULT_FETCH_STATE = {
 } as const
 
 const PRELOADER = 'Loading...'
+const LS_FAVORITES_KEY = 'favorites'
 
 export const Product = () => {
   const navigate = useNavigate()
@@ -44,8 +45,6 @@ export const Product = () => {
       })
   }, [id, navigate])
 
-  console.log(carInfo)
-
   return (
     <>
       <PictureBox>
@@ -62,15 +61,20 @@ export const Product = () => {
           </Box>
         )}
 
-        {carInfo.data && <ProductInfo {...carInfo.data.car} />}
+        {carInfo.data && <ProductInfo carInfo={carInfo.data.car} />}
       </AppContainer>
     </>
   )
 }
 
-const ProductInfo = (props: CarInfo) => {
+interface ProductInfoProps {
+  carInfo: CarInfo
+}
+
+const ProductInfo = ({ carInfo }: ProductInfoProps) => {
   const { manufacturerName, modelName, stockNumber, mileage, fuelType, color } =
-    props
+    carInfo
+  const [isFavorite, setIsFavorite] = useFavorites(carInfo)
 
   return (
     <Box display="flex" py={3}>
@@ -91,17 +95,55 @@ const ProductInfo = (props: CarInfo) => {
       </Box>
 
       <Aside>
-        <Typography>
-          If you like this car, click the button and save it in your collection
-          of favourite items
+        <Typography mb={0.5}>
+          {isFavorite
+            ? 'The car is in your collection'
+            : 'If you like this car, click the button and save it in your collection of favourite items'}
         </Typography>
 
-        <ButtonSave variant="contained" title="Save">
-          Save
+        <ButtonSave variant="contained" title="Save" onClick={setIsFavorite}>
+          {isFavorite ? 'Remove' : 'Save'}
         </ButtonSave>
       </Aside>
     </Box>
   )
+}
+
+const useFavorites = (carInfo: CarInfo) => {
+  const [isFavorite, setIsFavorite] = useState(false)
+
+  const getFavoritesFromStorage = useCallback(() => {
+    return JSON.parse(
+      localStorage.getItem(LS_FAVORITES_KEY) ?? '[]',
+    ) as CarInfo[]
+  }, [])
+
+  const checkIsFavorite = useCallback(() => {
+    const favorites = getFavoritesFromStorage()
+
+    return favorites.some(
+      ({ stockNumber }) => stockNumber === carInfo.stockNumber,
+    )
+  }, [carInfo.stockNumber, getFavoritesFromStorage])
+
+  const handleToggle = useCallback(() => {
+    const favorites = getFavoritesFromStorage()
+
+    const updatedFavoritesList = isFavorite
+      ? favorites.filter(
+          ({ stockNumber }) => stockNumber !== carInfo.stockNumber,
+        )
+      : [...favorites, carInfo]
+
+    localStorage.setItem(LS_FAVORITES_KEY, JSON.stringify(updatedFavoritesList))
+    setIsFavorite(!isFavorite)
+  }, [carInfo, getFavoritesFromStorage, isFavorite])
+
+  useEffect(() => {
+    setIsFavorite(checkIsFavorite())
+  }, [checkIsFavorite])
+
+  return [isFavorite, handleToggle] as const
 }
 
 const PictureBox = styled(Box)(({ theme }) => ({
@@ -118,6 +160,7 @@ const Picture = styled('img')(({ theme }) => ({
 }))
 
 const Aside = styled('aside')(({ theme }) => ({
+  alignSelf: 'flex-start',
   borderRadius: theme.shape.borderRadius,
   border: `1px solid ${theme.palette.divider}`,
   display: 'flex',

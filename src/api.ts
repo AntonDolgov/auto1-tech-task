@@ -6,10 +6,14 @@ import type {
 } from './types'
 
 const HARDCODED_URL_BASE = 'https://auto1-mock-server.herokuapp.com'
-const REG_EXP = /(?<=(:\/\/.*))\/\//g
+const REG_EXP = /\w\/\//g
 
-const request = (enpoint: string) =>
-  fetch(`${HARDCODED_URL_BASE}/${enpoint}`.replace(REG_EXP, '/'))
+const request = (enpoint: string) => {
+  const url = `${HARDCODED_URL_BASE}/${enpoint}`.replace(REG_EXP, (match) =>
+    match.slice(0, -1),
+  )
+
+  return fetch(url)
     .then((res) => {
       if (res.status !== 200) {
         throw new Error(`${res.status} – ${res.statusText}`)
@@ -21,6 +25,7 @@ const request = (enpoint: string) =>
       console.error(error)
       throw new Error(error)
     })
+}
 
 const getRequestParams = (params: { [key: string]: unknown }) =>
   Object.entries(params)
